@@ -17,7 +17,8 @@ Nombre: <input type="text" name="name"> &nbsp;&nbsp;&nbsp;
             <th><Center>Nombre</Center></th>
             <th><Center>Marca</Center></th>
             <th><Center>Categoria</Center></th>
-            <th><Center>Cantidad</Center></th>      
+            <th><Center>Cantidad ingresada</Center></th>
+            <th><Center>Cantidad vendida</Center></th>      
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,7 @@ Nombre: <input type="text" name="name"> &nbsp;&nbsp;&nbsp;
                 <td><CENTER><%= product.brand %></CENTER></td>
                 <td><CENTER><%= product.category %></CENTER></td>
                 <td><CENTER><%= product.quantity %></CENTER></td>
+                <td><CENTER>3</CENTER></td>
             </tr>
         <% end %>
     </tbody>

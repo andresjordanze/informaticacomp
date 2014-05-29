@@ -1,5 +1,4 @@
-<h1>Todos los Proveedores</h1>
-<h3><%= link_to 'Agregar Proveedor', new_provider_path, :class => 'btn btn-success' %></h3>
+<h1>Lista de Proveedores</h1>
 
 <%= link_to_function "Buscar Proveedor", "$('#hide').toggle()", :class => "btn btn-info" %><br>
 <div id="hide" style="display:none">
@@ -16,17 +15,23 @@ Nombre: <input type="text" name="name"> &nbsp;&nbsp;&nbsp;
 <thead>
   <tr>
     <th><CENTER><%=link_to "Nombre", :sort => "name" %></CENTER></th>
+    <th><CENTER><%=link_to "Email" %></CENTER></th>
+    <th><CENTER><%=link_to "Telefono" %></CENTER></th>
+    <th><CENTER><%=link_to "Direccion" %></CENTER></th>
   </tr>
 </thead>
 <tbody>
 <% @providers.each do |provider| %>
   <tr>
     <td><CENTER><%= provider.name %></CENTER></td>
-    <td><%= link_to 'Ver', {:controller => :providers, :action => 'show', :id => provider.id} , :class => 'btn btn-mini btn-success' %>
-    <%= link_to 'Editar', {:controller => :providers, :action => "edit", :id => provider.id}, :class => 'btn btn-mini btn-info' %>
+    <td><CENTER><%= provider.mail %></CENTER></td>
+    <td><CENTER><%= provider.phone %></CENTER></td>
+    <td><CENTER><%= provider.address %></CENTER></td>
+    <td><%= link_to 'Editar', {:controller => :providers, :action => "edit", :id => provider.id}, :class => 'btn btn-mini btn-warning' %>
     <%= link_to 'Eliminar', provider, method: :delete, data: { confirm: 'Seguro de eliminar el proveedor?' }, :class => 'btn btn-mini btn-danger' %></td>
   </tr>
 <% end %>
 </tbody>
 </table>
 </CENTER>
+<h3><%= link_to 'Agregar Proveedor', new_provider_path, :class => 'btn btn-jordi' %></h3>

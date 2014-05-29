@@ -1,8 +1,7 @@
 <%= form_validated_for(@provider) do |f| %>
 
-  
     <%= f.label :name, "*Nombre de Proveedor" %>
-    <p><%= f.text_field :name,:maxlength => '20' %></p>
+    <p><%= f.text_field :name,:maxlength => '40' %></p>
 
   
     <%= f.label :mail, "*Email" %>
@@ -13,8 +12,8 @@
     <p><%= f.text_field :phone,:maxlength => '8' %></p>
 
   
-    <%= f.label :country, "*Locacion" %>
-    <p><%= f.text_field :country,:maxlength => '20' %></p>
+    <%= f.label :address, "*Direccion" %>
+    <p><%= f.text_area :address,:maxlength => '50' %></p>
   
   <p><%= f.submit (@provider.new_record? ? 'Agregar Proveedor' : 'Guardar Cambios'), :class => 'btn btn-lg btn-success' %></p>
 <% end %>

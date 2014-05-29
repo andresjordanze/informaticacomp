@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :rol
       t.string :password_hash
       t.string :password_salt
+      
       t.timestamps
     end
   end

@@ -1,7 +1,9 @@
 class Productorder < ActiveRecord::Base
+	
+	belongs_to :brand
 	belongs_to :order
-	has_many :productnames
-	attr_accessible :nombre_producto, :quantity, :code, :ingresado, :description, :price, :total_price, :order_id
+
+	attr_accessible :name, :quantity, :code, :brand_id, :ingresado, :description, :price, :total_price, :order_id
 
 	validates :quantity, presence: {:message => "Es un campo obligatorio"}
 	validates :quantity, numericality: {:message => "La cantidad debe ser numerico"}

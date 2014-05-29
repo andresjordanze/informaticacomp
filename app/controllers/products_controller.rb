@@ -165,7 +165,7 @@ class ProductsController < ApplicationController
 	#	end
 	#end
 
-	def products_home
+	def 
 		@products = Product.all
 	end
 

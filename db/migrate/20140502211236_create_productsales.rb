@@ -1,11 +1,11 @@
-class CreateProductnames < ActiveRecord::Migration
+class CreateProductsales < ActiveRecord::Migration
   def change
-    create_table :productnames do |t|
+    create_table :productsales do |t|
     	t.string :name
     	t.string :code
     	t.string :description
-    	t.string :serial
     	t.string :brand
+      t.string :price
 
       t.timestamps
     end

@@ -6,6 +6,7 @@ class CreateSales < ActiveRecord::Migration
       t.string :client_name
       t.integer :nit
       t.boolean :confirmed
+      
       t.timestamps
     end
   end

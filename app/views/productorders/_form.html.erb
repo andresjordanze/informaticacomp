@@ -1,11 +1,15 @@
-<%= form_validated_for([@order, @order.productorders.build]) do |f| %>
-  <p>
-    <%= f.label :name, "Producto" %>
-    <%=f.collection_select(:nombre_producto, Productname.all, :id, :name)%>
-    <%= f.label :quantity, "Cantidad" %>
-    <%= f.text_field :quantity, :maxlength => '4' %>
-    <%= f.label :price, "Precio Unit." %>
-    <%= f.text_field :price, :maxlength => '6' %>
-    <%= f.submit "Agregar Producto a Pedido", class: "btn btn-large btn-jordi" %>
+<%= form_validated_for(@productorder) do |f| %>
+  
+    <%= f.label :name, "*Nombre del producto" %>
+    <p><%= f.text_field :name, :maxlength => '20'%></p>
+    <%=f.label :brand, "*Marca" %>
+    <p><%=f.collection_select(:brand_id, Brand.all, :id, :name)%></p> 
+    <%= f.label :code, "*Codigo del producto" %>
+    <p><%= f.text_field :code, :maxlength => '10'%></p>  
+    <%= f.label :description, "*Descripcion" %>
+    <p><%= f.text_area :description, :maxlength => '160'%>
+    <%= f.hidden_field :control, :value => "false" %>
   </p>
+
+  <p><%= f.submit (@productorder.new_record? ? 'Registrar Producto' : 'Guardar Cambios'), :class => 'btn btn-lg btn-primary' %></p>
 <% end %>

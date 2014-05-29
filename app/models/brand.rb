@@ -1,5 +1,8 @@
 class Brand < ActiveRecord::Base
 	attr_accessible :name
+
+  has_many :productorders, :dependent => :destroy
+
 	validates :name, presence: {:message => "Usted debe ingresar el nombre de la marca"}	
 	validates :name, uniqueness: {case_sensitive: false, :message => "La marca ya existe"}
 	validates :name, format: { with: /\A[a-zA-Z\d\s]+\z/,

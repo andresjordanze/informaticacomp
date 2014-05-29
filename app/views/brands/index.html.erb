@@ -23,7 +23,7 @@
   <tr>
     <td><CENTER><%= brand.name %></CENTER></td>
     <td><%= link_to 'Editar', {:controller => :brands, :action => "edit", :id => brand.id}, :class => 'btn btn-mini btn-warning' %>
-    <%= link_to 'Eliminar', brand, method: :delete, data: { confirm: 'Seguro de eliminar la marca?' }, :class => 'btn btn-mini btn-danger' %></td>
+    <%= link_to 'Eliminar', brand, method: :delete, :class => 'btn btn-mini btn-danger' %></td>
   </tr>
 <% end %>
 

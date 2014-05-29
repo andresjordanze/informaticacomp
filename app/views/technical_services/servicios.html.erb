@@ -3,6 +3,14 @@
 <h1>Reporte de Servicios</h1>
 <br>
 
+<div>
+    <form method="GET" action="/technical_services/search">
+    Busqueda: <input type="text" name="value" placeholder="Cliente o Numero de servicio"> &nbsp;&nbsp;&nbsp;
+    <input type="submit" value="Buscar", class="btn btn-info">
+    </form>
+    
+</div><br><br>
+
 <table class="table table-striped">
 <thead>
   <tr>
@@ -26,7 +34,7 @@
     <td><%= technical_service.product_code %></td>
     <td><%= technical_service.detail %></td>
     <td><%= technical_service.problems %></td>
-    <td><%= technical_service.repair %></td>
+    <td><%= technical_service.repairs %></td>
     <td><%= technical_service.status %></td>
     <td><%= technical_service.created_at.strftime("%d/%m/%Y") %></td>
   </tr>
@@ -36,4 +44,4 @@
 </br>
 </div>
 
-<form><input type="button" name="imprimir" value="Imprimir" onclick="window.print();"></form>
+<form><input type="button" name="imprimir" value="Imprimir" onclick="window.print();"><% render layout: false %></form>

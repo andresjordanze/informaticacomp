@@ -1,8 +1,5 @@
 <% title "Editar Proveedor" %>
-
-<h1><%= @provider.name%></h1>
-<center>
+<h1>Editar proveedor</h1>
 <%= render 'form' %>
 <br>
-<%= button_to 'Volver', providers_path, :method => :get, class: "btn btn-primary"  %>
-</center>
+<%= button_to 'Volver', providers_path, :method => :get, class: "btn btn-default"  %>

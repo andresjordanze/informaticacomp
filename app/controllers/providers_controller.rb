@@ -14,7 +14,6 @@ class ProvidersController < ApplicationController
    	@provider = Provider.new
 	end
 
-  
   	def edit
     	@provider = Provider.find(params[:id])
   	end
@@ -22,7 +21,8 @@ class ProvidersController < ApplicationController
   	def create
     	@provider = Provider.new(params[:provider])
       if @provider.save
-       	redirect_to @provider, notice: 'Proveedor creado exitosamente.'
+        flash[:success] = 'Proveedor creado exitosamente.'
+       	redirect_to "/providers/"
       else
         render action: "new" 
       end
@@ -31,7 +31,8 @@ class ProvidersController < ApplicationController
   def update
   	@provider = Provider.find(params[:id])
     if @provider.update_attributes(params[:provider])
-	    redirect_to @provider, notice: 'Proveedor editado exitosamente.'
+	    flash[:success] = 'Proveedor editado exitosamente.'
+      redirect_to "/providers/"
     else
     	render action: "edit" 
     end

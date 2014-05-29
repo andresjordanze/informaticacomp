@@ -6,6 +6,7 @@ class ProductordersController < ApplicationController
 
   def show
    	@productorder = Productorder.find(params[:id])
+    @brand  = Brand.find(@productorder.brand_id)
 	end
 
   def new
@@ -17,36 +18,23 @@ class ProductordersController < ApplicationController
   end
 
   def create
-    @control = false
-    @order = Order.find(params[:order_id])
-    @productname = Productname.find(params[:productorder][:nombre_producto])
-    @productorders = Productorder.where("order_id = :order_id", {order_id: @order.id}).to_a
-    @productorders.each do |productorder|
-      if productorder.code == @productname.code
-        @control = true
-      end
-    end
-    if @control == false
-      @productorder = Productorder.new(params[:productorder])
-      @productorder.nombre_producto = @productname.name
-      @productorder.code = @productname.code
-      @productorder.description = @productname.description
-      @productorder.ingresado = false
-      @productorder.order_id = @order.id
-      @productorder.total_price = params[:productorder][:quantity].to_i*params[:productorder][:price].to_i
+    if params[:productorder][:control] == "true"
+      @productorder = Productorder.find(params[:productorder][:id])
+      @productorder.quantity = params[:productorder][:quantity]
+      @productorder.price = params[:productorder][:price]
+      @productorder.order_id = params[:order_id]
+      @productorder.total_price = @productorder.quantity * @productorder.price
       @productorder.save
-      if params[:productorder][:control] == "true"
-        redirect_to '/orders/'+@order.id.to_s+'/edit'
-      else
-        redirect_to '/orders/'+@order.id.to_s
-      end
+      redirect_to '/orders/'+@productorder.order_id.to_s
     else
-      if params[:productorder][:control] == "true"
-        flash[:danger] = 'No se registro el producto, porque ya existe en pedido'
-        redirect_to '/orders/'+@order.id.to_s+'/edit'
-      else 
-        flash[:danger] = 'No se registro el producto, porque ya existe en pedido'
-        redirect_to '/orders/'+@order.id.to_s
+      @brand = Brand.find(params[:productorder][:brand_id].to_i)
+      @productorder = @brand.productorders.create(params[:productorder])
+      @productorder.quantity = 1
+      if @productorder.save 
+        flash[:success] = "Producto creado exitosamente!"
+        redirect_to productorder_path(@productorder)
+      else
+        render action: "new"
       end
     end
   end

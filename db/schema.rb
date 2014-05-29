@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526100255) do
+ActiveRecord::Schema.define(version: 20140528044615) do
 
   create_table "brands", force: true do |t|
     t.string   "name"
@@ -61,20 +61,23 @@ ActiveRecord::Schema.define(version: 20140526100255) do
     t.datetime "updated_at"
   end
 
-  create_table "productnames", force: true do |t|
-    t.string   "name"
+  create_table "productincomes", force: true do |t|
     t.string   "code"
-    t.string   "description"
-    t.string   "serial"
-    t.string   "brand"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "quantity"
+    t.boolean  "ingresado"
+    t.integer  "price"
+    t.integer  "total_price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "productorders", force: true do |t|
     t.string   "code"
-    t.string   "nombre_producto"
+    t.string   "name"
     t.text     "description"
+    t.integer  "brand_id"
     t.integer  "quantity"
     t.boolean  "ingresado"
     t.integer  "price"
@@ -84,21 +87,17 @@ ActiveRecord::Schema.define(version: 20140526100255) do
     t.datetime "updated_at"
   end
 
-  add_index "productorders", ["order_id"], name: "index_productorders_on_order_id"
-
   create_table "products", force: true do |t|
     t.string   "name"
     t.text     "detail"
     t.text     "description"
-    t.string   "general_code"
-    t.string   "brand"
+    t.string   "code"
+    t.integer  "brand_id"
     t.string   "category"
     t.float    "bought_price"
     t.float    "sale_price"
     t.integer  "quantity"
-    t.integer  "increase"
     t.boolean  "home"
-    t.integer  "id_order"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "photo_file_name"
@@ -107,11 +106,21 @@ ActiveRecord::Schema.define(version: 20140526100255) do
     t.datetime "photo_updated_at"
   end
 
+  create_table "productsales", force: true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.string   "description"
+    t.string   "brand"
+    t.string   "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "providers", force: true do |t|
     t.string   "name"
     t.integer  "phone"
     t.string   "mail"
-    t.string   "country"
+    t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

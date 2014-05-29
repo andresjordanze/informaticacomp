@@ -4,7 +4,8 @@ class CreateProviders < ActiveRecord::Migration
     	t.string :name
     	t.integer :phone
     	t.string :mail
-    	t.string :country
+    	t.string :address
+    	
       t.timestamps
     end
   end

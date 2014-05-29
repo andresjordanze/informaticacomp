@@ -1,8 +1,8 @@
-<h1>Registrar Pedido</h1>
+<h1>Registrar Pedido Nº:<%= @order.id%></h1>
 
-<div class="row">
-  <div class="col-xs-3">
   <%= form_validated_for(@order) do |f| %>
+    <h3> Fecha:
+    <%= f.date_select :created_at %></h3>
     <table width="400">
       <tr>
         <th><h3><%=f.label :provider, "Proveedor" %> <%=f.collection_select(:provider, Provider.all, :name, :name)%></h3></th>
@@ -10,8 +10,6 @@
       </tr>
     </table>
   <%end%>
-  </div>
-</div>
 
 
 <h1>Productos:</h1>
@@ -37,7 +35,7 @@
 <% @order.productorders.each do |producto| %>
 
   <tr>
-    <td><CENTER><%= producto.nombre_producto%></CENTER></td>
+    <td><CENTER><%= producto.name%></CENTER></td>
     <td><CENTER><%= producto.code %></CENTER></td>
     <td><CENTER><%= producto.quantity %></CENTER></td>
     <td><CENTER><%= producto.price %></CENTER></td>
@@ -64,7 +62,18 @@
 <br/>
 
 <%if nuevo == true || cantidad > 0 %>
-    <%= render "productorders/form" %>
+    <%= form_validated_for([@order, @order.productorders.build]) do |f| %>
+      <%= f.label :nombre_producto , "Producto:" %>
+      <%=f.collection_select(:id, Productorder.all, :id, :name)%>
+        <%= f.label :quantity, "Cantidad" %>
+        <%= f.text_field :quantity, :maxlength => '4' %>
+        <%= f.label :price, "Precio Unit." %>
+        <%= f.text_field :price, :maxlength => '4' %>
+        <%= f.hidden_field :control, :value => 'true' %>
+      <%= f.submit "Agregar producto a pedido", class: "btn btn-large btn-jordi" %></p>
+  </div>
+  <!--</div>-->
+  <%end%>
 <%end%>
 
 <%= link_to 'Cancelar pedido', order_path(@order), method: :delete, :class => 'btn btn-danger' %>

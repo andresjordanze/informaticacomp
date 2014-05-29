@@ -39,8 +39,19 @@ class BrandsController < ApplicationController
 
   
   def destroy
+    control = true
     @brand = Brand.find(params[:id])
-    @brand.destroy
+    @brand.productorders.each do |productorder|
+      if productorder.brand_id == @brand.id
+        control = false
+        flash[:danger] = "No puede eliminar la marca porque existen productos asociados a esta."    
+      end
+      break if control == false
+    end
+    if control == true
+      flash[:success] = "Se elimino la marca exitosamente."
+      @brand.destroy
+    end
     redirect_to brands_url 
   end
 

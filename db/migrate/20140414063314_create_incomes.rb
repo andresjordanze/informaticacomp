@@ -8,6 +8,7 @@ class CreateIncomes < ActiveRecord::Migration
       t.string :code
       t.integer :price
       t.integer :total_price
+      
       t.timestamps
     end
   end
